@@ -1,0 +1,1 @@
+# singlestore-supported-versions
