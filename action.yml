@@ -7,7 +7,7 @@ outputs:
 
 runs:
   using: "docker"
-  image: "python:3.9-slim"
+  image: "Dockerfile"
   args:
     - python
     - /action/singlestore_supported_versions.py

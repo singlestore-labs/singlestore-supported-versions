@@ -1,0 +1,16 @@
+on: [ push ]
+
+jobs:
+  fetch-s2-versions:
+    runs-on: ubuntu-latest
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Get supported versions of Singlestore
+        id: get_versions
+        uses: ./
+      # Use the output from the `get_versions` step
+      - name: Print versions
+        run: echo "versions ${{ steps.get_versions.outputs.versions }}"
