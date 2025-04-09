@@ -1,0 +1,13 @@
+name: Singlestore Supported Versions
+description: This action scrapes the supported SingleStore versions that are not EOL from the documentation.
+
+outputs:
+  versions:
+    description: "A JSON array of supported SingleStore versions"
+
+runs:
+  using: "docker"
+  image: "python:3.9-slim"
+  args:
+    - python
+    - /action/singlestore_supported_versions.py

@@ -1,6 +1,7 @@
-# Singlestore Supported Versions Action
+# SingleStore Supported Versions Action
 
-This GitHub Action retrieves **SingleStore versions** that are **not End of Life (EOL)** by scraping the official documentation page.
+This GitHub Action retrieves **SingleStore versions** that are **not End of Life (EOL)** by scraping the official
+documentation page.
 
 ## Outputs
 

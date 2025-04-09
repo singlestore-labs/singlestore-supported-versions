@@ -1,3 +1,4 @@
+import json
 import urllib.request
 from datetime import datetime
 
@@ -38,4 +39,5 @@ def get_supported_versions(table):
 if __name__ == "__main__":
     eol_page_html = get_page_html(SINGLESTORE_EOL_PAGE_LINK)
     eol_table = get_table(eol_page_html)
-    print(get_supported_versions(eol_table))
+    supported_versions = get_supported_versions(eol_table)
+    print(f"::set-output name=versions::{json.dumps(supported_versions)}")
