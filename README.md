@@ -12,18 +12,39 @@ documentation page.
 Here’s how to use this action in your GitHub workflows:
 
 ```yaml
-name: Fetch Supported SingleStore Versions
+name: Test
 
 on:
-  workflow_dispatch:
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+  schedule:
+    - cron: "0 0 * * 0"
 
 jobs:
-  fetch-supported-versions:
+  fetch-s2-versions:
     runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.get_versions.outputs.versions }}
     steps:
-      - name: Get supported versions of SingleStore
+      - name: Get supported versions of Singlestore
         id: get_versions
-        uses: your-username/singlestore-active-versions@v1
+        uses: singlestore-labs/singlestore-supported-versions@main
 
-      - name: Display the supported versions
-        run: echo "Supported SingleStore Versions: ${{ steps.get_versions.outputs.versions }}"
+  test:
+    needs: fetch-s2-versions
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        singlestore_version: ${{ fromJson(needs.fetch-s2-versions.outputs.versions) }}
+
+    services:
+      singlestore:
+        image: ghcr.io/singlestore-labs/singlestoredb-dev:latest
+        ports:
+          - "3306:3306"
+        env:
+          SINGLESTORE_LICENSE: ${{ secrets.SINGLESTORE_LICENSE }}
+          ROOT_PASSWORD: ${{ secrets.SINGLESTORE_PASSWORD }}
+          SINGELSTORE_VERSION: ${{ matrix.singlestore_version }}
+```
