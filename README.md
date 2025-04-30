@@ -1,7 +1,8 @@
 # SingleStore Supported Versions Action
 
 This GitHub Action retrieves **SingleStore versions** that are **not End of Life (EOL)** by scraping the official
-documentation page.
+documentation page. It is intended for use in testing scenarios within open-source SingleStore integrations,
+such as running integration tests against supported versions.
 
 ## Outputs
 
