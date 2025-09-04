@@ -1,5 +1,10 @@
 name: Singlestore Supported Versions
 description: This action scrapes the supported SingleStore versions that are not EOL from the documentation.
+inputs:
+  include_rc:
+    description: "Include release candidate versions"
+    required: false
+    default: "false"
 
 outputs:
   versions:
@@ -11,3 +16,4 @@ runs:
   args:
     - python
     - /action/singlestore_supported_versions.py
+    - ${{ inputs.include_rc }}
