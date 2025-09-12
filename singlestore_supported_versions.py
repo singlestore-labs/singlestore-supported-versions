@@ -64,4 +64,5 @@ if __name__ == "__main__":
         rc_versions = get_rc_versions()
         # Add RC versions not already in supported_versions
         supported_versions += [v for v in rc_versions if v not in supported_versions]
+    supported_versions += [str(include_rc)]
     print(f"::set-output name=versions::{json.dumps(supported_versions)}")
