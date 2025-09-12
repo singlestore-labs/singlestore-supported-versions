@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Get supported versions of Singlestore
         id: get_versions
-        uses: singlestore-labs/singlestore-supported-versions@main
+        uses: singlestore-labs/singlestore-supported-versions@pavlo-test
         with:
           include_rc: "true"
       # Use the output from the `get_versions` step
