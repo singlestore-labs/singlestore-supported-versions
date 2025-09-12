@@ -59,6 +59,7 @@ if __name__ == "__main__":
     eol_page_html = get_page_html(SINGLESTORE_EOL_PAGE_LINK)
     eol_table = get_table(eol_page_html)
     supported_versions = get_supported_versions(eol_table)
+    print(f"included rc: {include_rc}")
     if include_rc:
         rc_versions = get_rc_versions()
         # Add RC versions not already in supported_versions
