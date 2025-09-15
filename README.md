@@ -30,6 +30,9 @@ jobs:
       - name: Get supported versions of Singlestore
         id: get_versions
         uses: singlestore-labs/singlestore-supported-versions@main
+        # set include_rc to True if you want to include release candidates to the list 
+        with:
+          include_rc: true
 
   test:
     needs: fetch-s2-versions
