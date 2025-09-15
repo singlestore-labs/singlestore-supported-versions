@@ -12,7 +12,7 @@ jobs:
         id: get_versions
         uses: singlestore-labs/singlestore-supported-versions@pavlo-test
         with:
-          include_rc: "true"
+          include_rc: true
       # Use the output from the `get_versions` step
       - name: Print versions
         run: echo "versions ${{ steps.get_versions.outputs.versions }}"

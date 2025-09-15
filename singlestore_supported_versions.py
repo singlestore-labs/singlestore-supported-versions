@@ -1,12 +1,13 @@
-import json
-import urllib.request
-from datetime import datetime
-import sys
 from bs4 import BeautifulSoup
+from datetime import datetime
+import json
 import os
+import sys
+import urllib.request
 
 SINGLESTORE_EOL_PAGE_LINK = "https://docs.singlestore.com/db/latest/support/singlestore-software-end-of-life-eol-policy/"
 RC_VERSIONS_LINK = "https://release.memsql.com/rc/index/singlestoredbserver/latest.json"
+
 
 def format_one_decimal(version):
     parts = version.split('.')
@@ -31,6 +32,7 @@ def get_table(html):
         data.append(values)
 
     return data
+
 
 def get_rc_versions():
     try:
@@ -68,12 +70,10 @@ if __name__ == "__main__":
     eol_page_html = get_page_html(SINGLESTORE_EOL_PAGE_LINK)
     eol_table = get_table(eol_page_html)
     supported_versions = get_supported_versions(eol_table)
-    print(f"included rc: {include_rc}")
     if include_rc:
         rc_versions = get_rc_versions()
         # Add RC versions not already in supported_versions
         supported_versions += [v for v in rc_versions if v not in supported_versions]
-    supported_versions += [str(include_rc)]
     # Write output to the GITHUB_OUTPUT file for GitHub Actions (replacement
     # for deprecated ::set-output).
     output_value = json.dumps(supported_versions)
