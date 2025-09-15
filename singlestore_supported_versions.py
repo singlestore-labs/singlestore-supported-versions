@@ -64,7 +64,7 @@ if __name__ == "__main__":
         arg_val = sys.argv[1]
     elif "INPUT_INCLUDE_RC" in os.environ:
         arg_val = os.environ.get("INPUT_INCLUDE_RC")
-    if arg_val:
+    if arg_val is not None:
         include_rc = str(arg_val).lower() == "true"
 
     eol_page_html = get_page_html(SINGLESTORE_EOL_PAGE_LINK)
