@@ -8,6 +8,7 @@ import urllib.request
 SINGLESTORE_EOL_PAGE_LINK = "https://docs.singlestore.com/db/latest/support/singlestore-software-end-of-life-eol-policy/"
 RC_VERSIONS_LINK = "https://release.memsql.com/rc/index/singlestoredbserver/latest.json"
 
+BLACKLISTED_VERSIONS = ["9.1"] # 9.1 was renamed to 10.0 for GA
 
 def format_one_decimal(version):
     parts = version.split('.')
@@ -74,6 +75,8 @@ if __name__ == "__main__":
         rc_versions = get_rc_versions()
         # Add RC versions not already in supported_versions
         supported_versions += [v for v in rc_versions if v not in supported_versions]
+    supported_versions = [v for v in supported_versions if v not in BLACKLISTED_VERSIONS]
+
     # Write output to the GITHUB_OUTPUT file for GitHub Actions (replacement
     # for deprecated ::set-output).
     output_value = json.dumps(supported_versions)
