@@ -1,5 +1,7 @@
 # SingleStore Supported Versions Action
 
+**Attention**: The code in this repository is intended for experimental use only and is not fully tested, documented, or supported by SingleStore. Visit the [SingleStore Forums](https://www.singlestore.com/forum/) to ask questions about this repository.
+
 This GitHub Action retrieves **SingleStore versions** that are **not End of Life (EOL)** by scraping the official
 documentation page. It is intended for use in testing scenarios within open-source SingleStore integrations,
 such as running integration tests against supported versions.
